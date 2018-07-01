@@ -1,8 +1,7 @@
 % calculate and save forward optical flow for each frame
 function flow_set = cal_flow_match(video_package_path, output_path, video_dir, direction)
-flow_path = fullfile(output_path, 'flow');
-if ~exists(flow_path, 'dir')
-    mkdir(flow_path);
+if ~exist(output_path, 'dir')
+    mkdir(output_path);
 end
 img_suffix = 'jpg';
 video_path = fullfile(video_package_path,video_dir);
@@ -22,14 +21,14 @@ elseif strcmp(direction,'backward')
 else
     error('param : direction is "forward" or "backward".');
 end
-video_flow_path = fullfile(flow_path,video_dir);
-if ~exist(video_flow_path,'dir')
-    mkdir(flow_path, video_dir);
+video_output_path = fullfile(output_path,video_dir);
+if ~exist(video_output_path,'dir')
+    mkdir(output_path, video_dir);
 end
 flow_set = cell(length(imgs),1);
 % the optical flow of the last frame is zero.
 for i = start_one:step:last_one
-    flo_path = fullfile(video_flow_path,[num2str(i,'%07d'),'.flo']);
+    flo_path = fullfile(video_output_path,[num2str(i,'%07d'),'.flo']);
     if ~exist(flo_path,'file')
         if i ~= last_one
             I1_path = fullfile(video_package_path,video_dir,[num2str(i,'%07d'),'.',img_suffix]);
