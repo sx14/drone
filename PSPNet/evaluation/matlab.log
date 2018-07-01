@@ -1,0 +1,21 @@
+[?1h=
+                            < M A T L A B (R) >
+                  Copyright 1984-2014 The MathWorks, Inc.
+                   R2014b (8.4.0.150421) 64-bit (glnxa64)
+                             September 15, 2014
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+[H[2J[?1h=Starting parallel pool (parpool) using the 'local' profile ... connected to 4 workers.
+{Error using importdata (line 136)
+Unable to open file.
+
+Error in eval_sub (line 3)
+list = importdata(fullfile(data_root,eval_list));
+
+Error in eval_all (line 71)
+parfor i = 1:gpu_num %change 'parfor' to 'for' if singe GPU testing is used
+} 
+>> 
