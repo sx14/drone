@@ -1,5 +1,10 @@
-*.caffemodel/
+*.caffemodel
+*.caffemodel.*
 PSPNet/build/
 PSPNet/.build_release/
 PSPNet/Makefile.config
 PSPNet/Makefile
+flownet2-master/build/
+flownet2-master/.build_release/
+flownet2-master/Makefile
+flownet2-master/Makefile.config
