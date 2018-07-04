@@ -1,11 +1,10 @@
 % calculate and save forward optical flow for each frame
-function cal_flow_fn(video_package_path, output_path, video_dir, direction)
+function cal_flow_fn(video_path, output_path, direction)
 if ~exist(output_path, 'dir')
     mkdir(output_path);
 end
 flownet_root_path = flownet_root();
 img_suffix = 'jpg';
-video_path = fullfile(video_package_path,video_dir);
 if exist(video_path,'dir')
     imgs = dir(fullfile(video_path, ['*.',img_suffix]));
 else
@@ -22,16 +21,16 @@ elseif strcmp(direction,'backward')
 else
     error('param : direction is "forward" or "backward".');
 end
-video_output_path = fullfile(output_path,video_dir);
-if ~exist(video_output_path,'dir')
-    mkdir(output_path, video_dir);
-end
+
 
 list_file_path = fullfile(flownet_root_path, 'list.txt');
+if exist(list_file_path, 'file')
+    delete(list_file_path);
+end
 img_list_file = fopen(list_file_path,'w');
 % the optical flow of the last frame is zero.
 for i = start_one:step:last_one
-    flo_path = fullfile(video_output_path,[num2str(i,'%07d'),'.flo']);
+    flo_path = fullfile(output_path,[num2str(i,'%07d'),'.flo']);
     if ~exist(flo_path,'file')
         if i ~= last_one
             I1_path = fullfile(video_path,[num2str(i,'%07d'),'.',img_suffix]);
@@ -59,4 +58,3 @@ set_env_cmd = ['bash ' fullfile(flownet_root_path, 'set-env.sh')];
 system(set_env_cmd);
 system(cal_flow_cmd);
 disp(['cal_',direction,'_flow finished.']);
-
