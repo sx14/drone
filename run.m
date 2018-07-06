@@ -3,6 +3,6 @@ data_root = '/media/sunx/Data/drone_dataset/VisDrone-Dataset/2-Object-Detection-
 output_root = '/home/sunx/output/drone';
 video_name = 'uav0000013_00000_v';
 % pspnet_main(data_root, fullfile(output_root, 'pspnet'), video_name);
-flow_main(data_root, output_root, video_name)
+% flow_main(data_root, output_root, video_name);
 % scene_main(fullfile(output_root, 'pspnet', 'gray'), fullfile(output_root, 'scene'), video_name);
 % motion_main(fullfile(output_root, 'flow'), fullfile(output_root, 'scene'), fullfile(output_root, 'motion'), video_name);

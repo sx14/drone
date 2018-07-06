@@ -2,11 +2,10 @@ function pspnet_main(data_root, output_root, video_name)
 if ~exist(output_root, 'dir')
     mkdir(output_root);
 end
-pspnet_root_path = pspnet_root();
-addpath(fullfile(pspnet_root_path, 'matlab')); %add matcaffe path
+pspnet_root = pspnet_root();
 addpath(genpath('visualizationCode'));
-model_weights = fullfile(pspnet_root_path,'evaluation/model/pspnet50_ADE20K.caffemodel');
-model_deploy = fullfile(pspnet_root_path,'evaluation/prototxt/pspnet50_ADE20K_473.prototxt');
+model_weights = fullfile(pspnet_root,'model/pspnet50_ADE20K.caffemodel');
+model_deploy = fullfile(pspnet_root,'prototxt/pspnet50_ADE20K_473.prototxt');
 fea_cha = 150; %number of classes
 base_size = 512; %based size for scaling
 crop_size = 473; %crop size fed into network
