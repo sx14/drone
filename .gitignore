@@ -8,3 +8,5 @@ flownet2-master/build/
 flownet2-master/.build_release/
 flownet2-master/Makefile
 flownet2-master/Makefile.config
+list.txt
+*.flo
