@@ -24,14 +24,15 @@ function process_video(flow_path, scene_path, output_path)
 if ~isdir(output_path)
     mkdir(output_path);
 end
-background_labels = [2,3,5,10];
+strong_background_labels = [2,3,5,10];
 weak_background_labels = [4,6,7];
+background_labels = [2,3,4,5,6,10];
 flows = dir(fullfile(flow_path,'*.flo'));
 for i = 1:length(flows)
     frame_index = num2str(i, '%07d');
     flow = readFlowFile(fullfile(flow_path, [frame_index, '.flo']));
     scene = imread(fullfile(scene_path,[frame_index, '.png']));
-    motion_map = extract_moving_region(scene, flow, background_labels);
+    motion_map = extract_moving_region_v4(scene, flow, background_labels);
 %     motion_map = extract_moving_region_v3(scene, flow, background_labels, weak_background_labels);
     imwrite(motion_map, fullfile(output_path, [frame_index, '.png']));
 end
