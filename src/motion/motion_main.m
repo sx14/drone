@@ -13,10 +13,10 @@ if nargin==3
     end
 end
 if nargin==4
-   save_motion_path = fullfile(output_root,video_name);
-   flow_video_path = fullfile(flow_root, video_name);
-   scene_video_path = fullfile(scene_root, video_name);
-   process_video(flow_video_path, scene_video_path, save_motion_path);
+    save_motion_path = fullfile(output_root,video_name);
+    flow_video_path = fullfile(flow_root, video_name);
+    scene_video_path = fullfile(scene_root, video_name);
+    process_video(flow_video_path, scene_video_path, save_motion_path);
 end
 
 
