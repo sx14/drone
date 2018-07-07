@@ -8,7 +8,7 @@ if nargin==3
         flow_video = flow_videos(i);
         save_motion_path = fullfile(output_root,flow_video.name);
         flow_video_path = fullfile(flow_root, flow_video.name);
-        scene_video_path = fullfile(scene_root, video.name);
+        scene_video_path = fullfile(scene_root, flow_video.name);
         process_video(flow_video_path,scene_video_path, save_motion_path);
     end
 end
