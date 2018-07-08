@@ -1,5 +1,5 @@
 % anno : cell (frame_sum * 200)
-function anno = read_anno(anno_root, video_root, video_name)
+function anno = read_anno_test(anno_root, video_root, video_name)
 frames = dir(fullfile(video_root, video_name, '*.jpg'));
 raw_anno = load(fullfile(anno_root, [video_name, '.txt']));
 anno = cell(length(frames), max(raw_anno(:, 2))+1);
