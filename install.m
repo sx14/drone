@@ -10,5 +10,3 @@ addpath(fullfile(root, 'PSPNet', 'evaluation'));
 addpath(fullfile(root, 'PSPNet'));
 % addpath(genpath(fullfile(root,'flownet2-master')));
 addpath(fullfile(root, 'flownet2-master'));
-args.video_path = '';
-args.output_path = '';
