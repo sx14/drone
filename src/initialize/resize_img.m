@@ -9,10 +9,8 @@ for i = 1:length(imgs)
     num1=num2str(i,'%07d');
     img_name = [num1,'.',suffix];
     resized_img_name = fullfile(video_resize_path,img_name);
-    if ~exist(fullfile(video_resize_path, img_name),'file')
-        I1 = imread(fullfile(video_path, img_name));
-        I1 = imresize(I1, [height, width], method);
-        imwrite(I1, resized_img_name);
-    end
+    I1 = imread(fullfile(video_path, img_name));
+    I1 = imresize(I1, [height, width], method);
+    imwrite(I1, resized_img_name);
 end
 disp('resize_img finished.');

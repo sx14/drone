@@ -15,6 +15,8 @@ for i = 1: size(raw_detection, 1)
     detection.box = [left, top, width, height];
     detection.score = raw_detection(i, 7);
     detection.class = raw_detection(i, 8);
+    detection.predict_box = [0,0,0,0];
+    detection.discard = 0;
     detections{detection.frame, frame_next_position(detection.frame)} = detection;
     frame_next_position(detection.frame, 1) = frame_next_position(detection.frame, 1) + 1;
 end

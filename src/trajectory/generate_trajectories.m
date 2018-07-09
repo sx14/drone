@@ -1,7 +1,7 @@
 function [trajectories, t_f_mat] = generate_trajectories(detections, flow_root)
 trajectory_max = 1000;
 [frame_sum, detection_max] = size(detections);
-% t_f_mat: 3rd dimension(1-detection_id_in_trajectory, 2-matching_detection_id_on_next_frame, 3-matching_score)
+% t_f_mat: 3rd dimension(1-detection_id_on_trajectory, 2-link_to_next_detection_id, 3-matching_score)
 % t_f_mat: 1st dimension(trajectory_id)
 % t_f_mat: 2nd dimension(frame_id)
 t_f_mat = zeros(trajectory_max, size(detections, 1), 3);
@@ -18,7 +18,6 @@ for d = 1:length(first_frame_detecions)
         break;
     end
 end
-
 % try to match the box on last frame
 for f = 2:frame_sum
     fprintf('processing : %d frame\n', f);
@@ -38,28 +37,35 @@ for f = 2:frame_sum
     for c_d = 1:detection_max
         curr_detection = curr_frame_detections{c_d};
         if ~isempty(curr_detection)
-            % not match yet
-            matched = 0;
+            highest_matching_score = 0;
+            best_matching_trajectory_id = 0;
             % for each existed trajectories
             for t = 1:trajectory_max
                 if t_f_mat(t,f-1,1) == 0
                     continue;
                 end
                 last_detection = last_frame_detections{t_f_mat(t,f-1,1)};
-                matching_score = match(last_detection, curr_detection);
-                if matching_score > 0
-                    % allow matching
-                    matched = 1;
-                    exist_matching_score = t_f_mat(t,f-1,3);
-                    if matching_score > exist_matching_score
-                        % match successfully, update trajectory
-                        t_f_mat(t,f-1,2) = c_d;
-                        t_f_mat(t,f-1,3) = matching_score;
-                        t_f_mat(t,f,1) = c_d;
-                    end
+                curr_matching_score = match(last_detection, curr_detection);
+                if curr_matching_score > highest_matching_score
+                    highest_matching_score = curr_matching_score;
+                    best_matching_trajectory_id = t;
                 end
             end
-            if matched == 0
+            if best_matching_trajectory_id > 0
+                exist_matching_score = t_f_mat(best_matching_trajectory_id,f-1,3);
+                if highest_matching_score > exist_matching_score
+                    % match successfully, update trajectory
+                    if exist_matching_score > 0
+                        % exist_matching_detection is redundant
+                        discard_detection = curr_frame_detections{t_f_mat(best_matching_trajectory_id,f-1,2)};
+                        discard_detection.discard = 1;
+                        curr_frame_detections{t_f_mat(best_matching_trajectory_id,f-1,2)} = discard_detection;
+                    end
+                    t_f_mat(best_matching_trajectory_id,f-1,2) = c_d;
+                    t_f_mat(best_matching_trajectory_id,f-1,3) = highest_matching_score;
+                    t_f_mat(best_matching_trajectory_id,f,1) = c_d;
+                end
+            else
                 % create new trajectory
                 t_f_mat(next_trajectory,f,1) = c_d;
                 next_trajectory = next_trajectory + 1;
