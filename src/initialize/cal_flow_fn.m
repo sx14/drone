@@ -54,7 +54,5 @@ PYTHONPATH = fullfile(flownet_root_path, 'python');
 python_script_path = fullfile(flownet_root_path, 'scripts', 'run-flownet-many.py');
 run_script_path = fullfile(flownet_root_path, 'scripts', 'run.sh');
 cal_flow_cmd = ['sh ' run_script_path ' ' PYTHONPATH ' ' python_script_path ' ' model_path ' ' deploy_prototxt_path ' ' list_file_path];
-% set_env_cmd = ['bash ' fullfile(flownet_root_path, 'set-env.sh')];
-% system(set_env_cmd);
 system(cal_flow_cmd);
 disp(['cal_',direction,'_flow finished.']);

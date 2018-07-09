@@ -1,9 +1,9 @@
 clear;clc;close all;
 anno_root = '/media/sunx/Data/drone_dataset/VisDrone-Dataset/2-Object-Detection-in-Videos/VisDrone2018-VID-train/annotations';
 video_root = '/media/sunx/Data/drone_dataset/VisDrone-Dataset/2-Object-Detection-in-Videos/VisDrone2018-VID-train/sequences';
-flow_root = '/home/sunx/output/drone/flow';
-temp_output_root = '/home/sunx/output/drone/temp';
-video_name = 'uav0000076_00720_v';
+flow_root = '/home/sunx/output/drone/train/flow';
+temp_output_root = '/home/sunx/output/drone/train/temp';
+video_name = 'uav0000013_00000_v';
 iou_threshold = 0.5;
 anno = read_anno_test(anno_root, video_root, video_name);
 predict = zeros(size(anno, 1), size(anno, 2));

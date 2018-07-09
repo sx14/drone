@@ -1,4 +1,4 @@
-function flow_main(video_root, flow_output_root, resize_output_root, video_name)
+function flow_main_v2(video_root, flow_output_root, resize_output_root, video_name)
 direction = 'forward'; % backward
 if ~exist(flow_output_root, 'dir')
     mkdir(flow_output_root);
