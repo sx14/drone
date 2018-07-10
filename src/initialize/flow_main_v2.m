@@ -18,7 +18,7 @@ if nargin==3
         end
         cal_flow_fn(video_path, fullfile(flow_output_root, video.name), direction);
         if resize == 1
-            resize_img(resize_output_root,resize_output_root,video.name,'flo',org_width,org_height,'nearest');
+            resize_img(flow_output_root,flow_output_root,video.name,'flo',org_width,org_height,'nearest');
         end
     end
 end
@@ -31,7 +31,7 @@ if nargin==4
     end
     cal_flow_fn(video_path, fullfile(flow_output_root, video_name), direction);
     if resize == 1
-        resize_img(resize_output_root,resize_output_root,video_name,'flo',org_width,org_height,'nearest');
+        resize_img(flow_output_root,flow_output_root,video_name,'flo',org_width,org_height,'nearest');
     end
 end
 
