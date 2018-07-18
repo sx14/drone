@@ -10,3 +10,4 @@ flownet2-master/Makefile
 flownet2-master/Makefile.config
 list.txt
 *.flo
+*.pth.tar

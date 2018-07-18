@@ -1,0 +1,4 @@
+/a/park 0
+/b/playground 1
+/c/road 2
+/d/street 3
