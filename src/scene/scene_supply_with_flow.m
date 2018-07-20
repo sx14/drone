@@ -2,9 +2,10 @@ function scene_supply_with_flow(pspnet_root, flow_root, interval, video_name)
 if nargin==3
     pspnet_scene_videos = dir(fullfile(pspnet_root,'gray','*'));
     for i = 3:length(pspnet_scene_videos)
-        video_pspnet_gray_path = fullfile(pspnet_root, 'gray', pspnet_scene_videos(i));
-        video_pspnet_color_path = fullfile(pspnet_root, 'color', pspnet_scene_videos(i));
-        video_flow_path = fullfile(flow_root, pspnet_scene_videos(i));
+        pspnet_scene_video = pspnet_scene_videos(i);
+        video_pspnet_gray_path = fullfile(pspnet_root, 'gray', pspnet_scene_video.name);
+        video_pspnet_color_path = fullfile(pspnet_root, 'color', pspnet_scene_videos.name);
+        video_flow_path = fullfile(flow_root, pspnet_scene_video.name);
         proccess_video(video_pspnet_gray_path, video_flow_path, interval, 'png');
         proccess_video(video_pspnet_color_path, video_flow_path, interval, 'png');
     end
