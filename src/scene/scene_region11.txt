@@ -1,3 +1,4 @@
+0 hole
 1 indoor
 2 building
 3 sky
