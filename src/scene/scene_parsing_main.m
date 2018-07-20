@@ -31,7 +31,11 @@ end
 pspnet_scene_maps = dir(fullfile(pspnet_scene_path,'*.png'));
 for i = 1:length(pspnet_scene_maps)
     frame_index = num2str(i, '%07d');
-    pspnet_scene_map = imread(fullfile(pspnet_scene_path, [frame_index, '.png']));
+    pspnet_scene_map_path = fullfile(pspnet_scene_path, [frame_index, '.png']);
+    if ~exist(pspnet_scene_map_path, 'file')
+        continue;
+    end
+    pspnet_scene_map = imread(pspnet_scene_map_path);
     scene_map = convert2scene(pspnet_scene_map);
     scene_map = uint8(scene_map);
     rgbPred = colorEncode(scene_map, colors);
